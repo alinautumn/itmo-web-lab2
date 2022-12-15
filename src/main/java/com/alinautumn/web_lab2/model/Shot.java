@@ -1,18 +1,18 @@
-package com.alinautumn.web_lab2;
+package com.alinautumn.web_lab2.model;
 
 public class Shot {
     private double x;
     private double y;
     private double r;
-    private String time;
+    private String timezone;
     private long scriptTime;
     private boolean status;
 
-    public Shot(double x, double y, double r, String time, long scriptTime, boolean status){
+    public Shot(double x, double y, double r, String timezone, long scriptTime, boolean status){
         this.x = x;
         this.y = y;
         this.r = r;
-        this.time = time;
+        this.timezone = timezone;
         this.scriptTime = scriptTime;
         this.status = status;
     }
@@ -33,8 +33,8 @@ public class Shot {
         return status;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimezone() {
+        return timezone;
     }
 
     public long getScriptTime() {
@@ -57,8 +57,8 @@ public class Shot {
         this.r = r;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
     public void setScriptTime(long scriptTime) {

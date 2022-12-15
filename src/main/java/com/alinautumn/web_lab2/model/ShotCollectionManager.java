@@ -1,4 +1,4 @@
-package com.alinautumn.web_lab2;
+package com.alinautumn.web_lab2.model;
 
 import java.util.LinkedList;
 

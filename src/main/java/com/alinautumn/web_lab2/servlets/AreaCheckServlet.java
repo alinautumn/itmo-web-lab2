@@ -1,5 +1,7 @@
-package com.alinautumn.web_lab2;
+package com.alinautumn.web_lab2.servlets;
 
+import com.alinautumn.web_lab2.model.Shot;
+import com.alinautumn.web_lab2.model.ShotCollectionManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

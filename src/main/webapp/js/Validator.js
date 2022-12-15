@@ -80,13 +80,13 @@ function addMessageToValidationPanel(message){
 
 function validateYTextField() {
     $('.y-text').on('input', function () {
-        $(this).val($(this).val().replace(/[^.\d]/, ''));
+        $(this).val($(this).val().replace(/[^-\d]/, ''));
     });
 }
 
 function validateRTextField() {
     $('.r-text').on('input', function () {
-        $(this).val($(this).val().replace(/[^.\d]/, ''));
+        $(this).val($(this).val().replace(/[^-\d]/, ''));
     });
 }
 

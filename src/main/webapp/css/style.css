@@ -88,10 +88,15 @@ input[type=button], input[type=submit], button[type="reset"]{
 input[type=number] {
     font-family: sans-serif;
     font-size: 110%;
-    font-weight: 600;
+    font-weight: 500;
     color: black;
     border: 1px solid black;
     border-radius: 10px;
+}
+
+input[type=number]::-webkit-input-placeholder {
+    color: #777777;
+    text-align: center;
 }
 
 input[type=submit]:enabled, button:enabled {

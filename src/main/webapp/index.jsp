@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -72,11 +73,9 @@
                 <text x="162" y="104">R/2</text>
                 <text x="162" y="204">-R/2</text>
                 <text x="162" y="254">-R</text>
-                <%--@elvariable id="shots" type="com.alinautumn.web_lab2.model.ShotCollectionManager"--%>
-                <c:forEach items="${shots.collection}" var="col">
-                    <circle class="shot" cx="${150 + 50 * 2/col.r * col.x}"
-                            cy="${150 - 50 * 2/col.r * col.y}" r="3"
-                            fill="#000000" stroke-width="0"></circle>
+                <%--@elvariable id="collection" type="java.util.LinkedList"--%>
+                <c:forEach items="${collection}" var="col">
+                    <circle class="shot" cx="${150 + 50 * 2/col.r * col.x}" cy="${150 - 50 * 2/col.r * col.y}" r="3" fill="red" stroke-width="0"></circle>
                 </c:forEach>
             </svg>
         </div>
@@ -97,18 +96,17 @@
                         <br>
                     </div>
                     <div id="y-values">
-                        <label for="y-value">Enter Y (-3 ... 5 ):</label>
-                        <input type = "number" class="y-text" maxlength="14" id="y-value" name="y-value"
-                               oninput="validateYTextField()" required> <br>
+                        <label for="y-value">Enter Y :</label>
+                        <input type="number" class="y-text" placeholder="Value from -3 to 5" maxlength="14" id="y-value" name="y-value"
+                               required> <br>
                     </div>
-                    <div id="r-values">
-                        <label for="r-value">Enter R ( 2 ... 5 ):</label>
-                        <input type = "number" class="r-text" maxlength="14" id="r-value" name="r-value"
-                               oninput="validateRTextField()" required> <br>
+                    <div id="r-values" onchange="moveDots()">
+                        <label for="r-value">Enter R :</label>
+                        <input type="number" class="r-text" placeholder="Value from 2 to 5" maxlength="14" id="r-value" name="r-value"
+                               required> <br>
                     </div>
                     <div id="formButtons">
                         <input type="submit" class="element" name="submit-btn" value="Submit">
-                        <button onClick="window.location.replace('result.jsp');" type="reset" onclick="">Last Result</button>
                     </div>
                 </div>
         </form>
@@ -121,7 +119,7 @@
     <input type="submit" class="element" id="clear-btn" value="Clean"
            onclick="cleanTable();">
     <table id="table">
-        <tr>
+        <tr class = "results">
             <th>X</th>
             <th>Y</th>
             <th>R</th>
@@ -129,17 +127,24 @@
             <th>Execution Time (msec)</th>
             <th>Hit Result</th>
         </tr>
-        <%--@elvariable id="shots" type="com.alinautumn.web_lab2.model.ShotCollectionManager"--%>
-        <tr>
-            <c:forEach items="${shots.collection}" var="col">
-                <td>${col.x.toString().format("%.2f", col.x).replaceAll(",",".")}</td>
-                <td>${col.y.toString().format("%.2f", col.y).replaceAll(",",".")}</td>
-                <td>${col.r.toString().trim().format("%.2f", col.r).replaceAll(",",".")}</td>
-                <td>${col.time.toString()}</td>
-                <td>${col.scriptTime.toString()}</td>
-                <td>${col.status.toString()}</td>
-            </c:forEach>
-        </tr>
+        <%--@elvariable id="collection" type="java.util.LinkedList"--%>
+        <c:forEach items="${collection}" var="col">
+            <tr class = "results">
+                <th>${col.getX().toString().format("%.2f", col.getX()).replaceAll(",",".")}</th>
+                <th>${col.getY().toString().format("%.2f", col.getY()).replaceAll(",",".")}</th>
+                <th>${col.getR().toString().format("%.2f", col.getR()).replaceAll(",",".")}</th>
+                <th>${col.getTimezone().toString()}</th>
+                <th>${col.getScriptTime().toString()}</th>
+                <c:choose>
+                    <c:when test="${col.getStatus().toString().trim()=='true'}">
+                        <th style="color: green">${col.getStatus().toString().toUpperCase()}</th>
+                    </c:when>
+                    <c:otherwise>
+                        <th style="color: red">${col.getStatus().toString().toUpperCase()}</th>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 </div>
